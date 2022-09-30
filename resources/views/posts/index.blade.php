@@ -7,17 +7,21 @@
     <title>All posts </title>
 </head>>
 <body>
-<a href="{{route('posts.create')}}"> Go to create Page </a>
+<div>
+    <a href="{{route('posts.create')}}"> Go to create Page </a>
+</div>
 
-<h3>Title 1</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eius eveniet excepturi itaque magni rem? </p>
-<h3>Title 2</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eius eveniet excepturi itaque magni rem? </p>
-<h3>Title 3</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eius eveniet excepturi itaque magni rem? </p>
-<h3>Title 4</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eius eveniet excepturi itaque magni rem? </p>
-<h3>Title 5</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt eius eveniet excepturi itaque magni rem? </p>
-</body>
+@foreach($posts as $post)
+    <a href="{{route('posts.show', $post->id) }}"><h3>{{$post->title }}</h3></a>
+    <p>{{$post->content}}</p>
+    <form action="{{route ('posts.destroy', $post->id)}}" method ="post">
+        @csrf
+        @method ('DELETE')
+        <button type ="submit">Delete </button>
+
+    </form>
+
+    @endforeach
+
+    </body>
 </html>
